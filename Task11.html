@@ -55,22 +55,28 @@
             })
         })
 
-        operation.addEventListener('click', () => {  
+        operation.addEventListener('click', () => {
             let finalResult = convert();
             inputBox.value = finalResult;
         })
 
 
-        
-        
-        function convert(){
-            if (inputBox.value.includes('+')) {  //12+12.includes('+')
-                let arr = inputBox.value.split('+');
-                let add = arr[0];
-                for (let x = 1; x < arr.length; x++) {
-                    add = parseInt(arr[x]) + parseInt(add);
-                }
-                return add;
+        function acting(operator) {
+            let arr = inputBox.value.split(operator);
+            console.log(arr)
+            let add = arr[0];
+            for (let x = 1; x < arr.length; x++) {
+                justResult = `${parseInt(arr[x])}  ${operator}  ${parseInt(add)}`;
+            }
+            return justResult;
+        }
+
+
+
+
+        function convert() {
+            if (inputBox.value.includes('+')) {
+                return acting('+');
             }
 
             else if (inputBox.value.includes('-')) {
@@ -103,7 +109,7 @@
                     div = div / arr[x];
                 }
 
-               return div;
+                return div;
             }
 
         }
