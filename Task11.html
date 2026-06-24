@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Calculator UI</title>
+</head>
+
+<body class="bg-gray-100 min-h-screen flex items-center justify-center">
+
+    <div class="w-80 bg-white border border-gray-200 rounded-xl shadow-md p-4">
+
+        <!-- Display -->
+        <input type="text" placeholder="0" disabled
+            class="w-full h-16 text-right text-3xl px-3 border border-gray-200 rounded-lg mb-4 outline-none" />
+
+        <!-- Buttons -->
+        <div class="grid grid-cols-4 gap-2 main-container">
+
+            <button class="btn">7</button>
+            <button class="btn">8</button>
+            <button class="btn">9</button>
+            <button class="btn op">*</button>
+
+            <button class="btn">4</button>
+            <button class="btn">5</button>
+            <button class="btn">6</button>
+            <button class="btn op">-</button>
+
+            <button class="btn">1</button>
+            <button class="btn">2</button>
+            <button class="btn">3</button>
+            <button class="btn op">+</button>
+
+            <button class="btn">0</button>
+            <input class="btn equal" type="submit" value="=" id="operation">
+            <button class="btn action" id="clear">C</button>
+            <button class="btn op">/</button>
+        </div>
+    </div>
+
+
+    <script>
+        let main = document.querySelector('.main-container');
+        let eachButton = main.querySelectorAll('button');
+        let inputBox = document.querySelector('input');
+        let operation = document.getElementById('operation');
+        let clear = document.getElementById('clear');
+
+        eachButton.forEach(button => {
+            button.addEventListener('click', (e) => {
+                inputBox.value += e.target.textContent
+            })
+        })
+
+        operation.addEventListener('click', () => {  
+            let finalResult = convert();
+            inputBox.value = finalResult;
+        })
+
+
+        
+        
+        function convert(){
+            if (inputBox.value.includes('+')) {  //12+12.includes('+')
+                let arr = inputBox.value.split('+');
+                let add = arr[0];
+                for (let x = 1; x < arr.length; x++) {
+                    add = parseInt(arr[x]) + parseInt(add);
+                }
+                return add;
+            }
+
+            else if (inputBox.value.includes('-')) {
+
+                let arr = inputBox.value.split('-').map(Number);
+                let sub = arr[0];
+                for (let x = 1; x < arr.length; x++) {
+                    sub = sub - arr[x];
+                }
+
+                return sub;
+            }
+
+            else if (inputBox.value.includes('*')) {
+                let arr = inputBox.value.split('*');
+                let mult = arr[0]; //9
+                console.log(mult)
+                for (let x = 1; x < arr.length; x++) {
+                    mult = mult * arr[x];
+                }
+
+                return mult;
+            }
+
+
+            else if (inputBox.value.includes('/')) {
+                let arr = inputBox.value.split('/');
+                let div = arr[0];
+                for (let x = 1; x < arr.length; x++) {
+                    div = div / arr[x];
+                }
+
+               return div;
+            }
+
+        }
+
+
+        clear.addEventListener('click', () => {
+            inputBox.value = ""
+        })
+
+
+
+
+
+
+    </script>
+
+
+
+</body>
+
+</html>

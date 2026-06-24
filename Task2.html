@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: red;
+            width: 100%;
+            height: 100vh;
+        }
+
+        .main{
+            background-color: yellow;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div>
+        <button id="btn" style="background-color: greenyellow; border-radius: 10px; padding: 30px; border: none;">Click</button>
+    </div>
+
+    <script>
+        let div = document.querySelector('div');
+        let btn = document.getElementById('btn');
+
+        btn.addEventListener('click', () =>{
+            div.setAttribute('class','main')
+
+        })
+    </script>
+    
+</body>
+</html>

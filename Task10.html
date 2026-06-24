@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <input type="text">
+    <button onclick="operation()">Click</button>
+    <p></p>
+
+    <script>
+        
+        function operation(){
+            let data = document.querySelector('input').value;
+            let output = document.querySelector('p');
+
+            if(data.includes('+')){  //12+12.includes('+')
+                let arr = data.split('+');
+                console.log(arr)
+                let add = parseInt(arr[0]) + parseInt(arr[1]);
+                output.textContent = add;
+            }
+
+            else if(data.includes('-')){
+                let arr = data.split('-');
+                let sub = parseInt(arr[0]) - parseInt(arr[1]);
+                output.textContent = sub;
+            }
+
+            else if(data.includes('*')){
+                let arr = data.split('*');
+                let mult = parseInt(arr[0]) * parseInt(arr[1]);
+               output.textContent = mult;
+            }
+
+
+            else if(data.includes('/')){
+                let arr = data.split('/');
+                let div = parseInt(arr[0]) / parseInt(arr[1]);
+                output.textContent = div;
+            }
+        }
+
+    </script>
+    
+</body>
+</html>

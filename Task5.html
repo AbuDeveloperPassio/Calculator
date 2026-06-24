@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <!DOCTYPE html>
+    <html>
+
+    <head>
+        <style>
+            input[type="checkbox"] {
+                display: none;
+            }
+
+            .track {
+                display: inline-block;
+                width: 52px;
+                height: 28px;
+                background: #ccc;
+                border-radius: 999px;
+                position: relative;
+                cursor: pointer;
+                transition: background 0.25s;
+            }
+
+            .circle {
+                position: absolute;
+                top: 4px;
+                left: 4px;
+                width: 20px;
+                height: 20px;
+                border-radius: 50%;
+                background: white;
+                transition: transform 0.25s;
+            }
+
+            input:checked+.track {
+                background: green;
+            }
+
+            input:checked+.track .circle {
+                transform: translateX(24px);
+            }
+        </style>
+    </head>
+
+    <body>
+
+
+
+        <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Numquam odio impedit, inventore tempora qui
+            laudantium alias aliquid nobis perspiciatis odit voluptatibus corrupti sed? Nam in doloribus assumenda
+            possimus a quaerat sint dicta! Minima aspernatur nobis, commodi sequi ut nisi ipsa ullam praesentium aliquid
+            maiores fuga explicabo nihil deserunt eligendi error atque unde mollitia. Officia repellendus atque amet
+            quidem illum provident, consectetur eum enim fugit error dolorem consequatur eius ipsum doloremque rerum,
+            ad, exercitationem similique. Nesciunt facilis distinctio quas est molestias delectus hic impedit
+            cupiditate? Amet optio, fugiat exercitationem quas delectus culpa nesciunt quod dolores fuga non. Atque
+            accusantium voluptatem facilis.</p>
+        <div style="position: fixed; top: 100px;">
+            <input type="checkbox" id="toggle">
+            <label class="track" for="toggle">
+            <span class="circle"></span>
+            </label>
+        </div>
+
+        <script>
+            let toggle = document.getElementById('toggle');
+            let para = document.querySelector('p');
+            toggle.addEventListener('click', () => {
+
+                if(para.style.display === "none"){
+                    para.style.display = "block";
+                 
+                }
+
+                else{
+                    para.style.display = "none";
+                }
+            })
+        </script>
+
+
+    </body>
+
+    </html>
+
+</body>
+
+</html>

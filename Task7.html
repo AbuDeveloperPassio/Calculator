@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores, vero ut quo vitae at nemo. Dolore, fuga
+        veritatis nemo delectus quaerat id odio doloremque, temporibus quas corporis tempore error architecto itaque
+        eos, harum quibusdam vel quam aut ex ad voluptate? Impedit nostrum ipsa, rem quidem maiores tempora sequi rerum
+        laboriosam nulla libero minus eius alias officia praesentium, quam placeat doloribus dolorem ab eos. Minus
+        temporibus doloremque possimus expedita illo maxime aperiam. Sint consequuntur ad sunt perspiciatis, repellat
+        sit earum ut rem quaerat sed. Itaque repellat sequi eligendi pariatur suscipit error consequatur reiciendis
+        natus minus! Reiciendis porro excepturi numquam nesciunt repellat.</p>
+    <button onclick="plus()">+</button>
+    <button onclick="minus()">-</button>
+
+    <script>
+        let para = document.querySelector('p');
+
+        function plus() {
+            para.style.fontSize = '30px'
+            let measurement = parseInt(para.style.fontSize);
+            para.style.fontSize = measurement;
+        }
+
+
+        function minus(){
+            para.style.fontSize = '15px'
+            let measurement = parseInt(para.style.fontSize);
+            para.style.fontSize = measurement;
+
+        }
+    </script>
+
+</body>
+
+</html>

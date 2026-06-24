@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .para{
+            display: none;
+        }
+
+        .para2{
+            display: block;
+        }
+
+
+
+    </style>
+</head>
+<body>
+
+    <p id="peom">Lorem ipsum dolor sit amet consectetur adipisicing elit. Animi dolor eos porro doloribus similique nam nostrum excepturi. In, ab? Voluptates aperiam suscipit id magnam ab perspiciatis provident assumenda sed facere! Est, cupiditate rerum debitis similique incidunt dolorum. Asperiores sunt dolores expedita, maxime deserunt velit inventore fugiat laboriosam quos? Dolorum, voluptatem animi quasi iusto, nemo mollitia cum natus at nulla rerum necessitatibus ad doloremque exercitationem voluptatibus illo. Sint culpa beatae quam provident veritatis reprehenderit ipsa atque ab deleniti doloribus! Tempore ad qui amet vitae ea odio animi suscipit asperiores. Doloremque a odio necessitatibus eligendi laudantium, tempora fugiat animi neque nihil accusantium?</p>
+    <button onclick="disapear()">Click to disapear</button>
+    <button onclick="apear()">Click to apear</button>
+
+    <script>
+        let poem = document.getElementById('peom');
+
+        function disapear(){
+            poem.setAttribute('class','para');
+        }
+
+        function apear(){
+            poem.setAttribute('class','para2');
+        }
+    </script>
+    
+</body>
+</html>
