@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -51,7 +52,11 @@
         </div>
     </div>
 
-    <script>
+    <!-- type="module" is required for `import` to work in a plain <script> tag -->
+    <script type="module">
+
+        import { evaluate } from "https://cdn.jsdelivr.net/npm/mathjs@13/+esm";
+
         // ---------- DOM references ----------
         const main = document.querySelector('.main-container');
         const eachButton = main.querySelectorAll('button');
@@ -86,27 +91,6 @@
             });
         }
 
-        // ---------- Calculator logic ----------
-        // function acting(operator) {
-        //     let arr = inputBox.value.split(operator);
-        //     let justValue = Number(arr[0]);
-
-        //     for (let x = 1; x < arr.length; x++) {
-        //         if (operator === '+') justValue += Number(arr[x]);
-        //         else if (operator === '-') justValue -= Number(arr[x]);
-        //         else if (operator === '*') justValue *= Number(arr[x]);
-        //         else if (operator === '/') justValue /= Number(arr[x]);
-        //     }
-
-        //     return justValue;
-        // }
-
-        // function convert() {
-        //     let operators = ['+', '-', '*', '/'];
-        //     let sign = operators.find(op => inputBox.value.includes(op));
-        //     return acting(sign);
-        // }
-
         // ---------- Event listeners ----------
         eachButton.forEach(button => {
             button.addEventListener('click', (e) => {
@@ -117,8 +101,14 @@
         operation.addEventListener('click', () => {
             numbers.push(inputBox.value);
             saveToLocal();
-            finalResult = Function('"use strict"; return (' + inputBox.value + ')')();;
-            inputBox.value = finalResult;
+            try {
+                finalResult = evaluate(inputBox.value);
+                inputBox.value = finalResult;
+            }
+            
+            catch (err) {
+                inputBox.value = 'Error';
+            }
             dispaly();
         });
 
