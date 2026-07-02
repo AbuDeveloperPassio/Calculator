@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -35,9 +36,11 @@
             <button class="btn op">+</button>
 
             <button class="btn">0</button>
+            <button class="btn">.</button>
             <input class="btn equal" type="submit" value="=" id="operation">
-            <button class="btn action" id="clear">C</button>
             <button class="btn op">/</button>
+
+            <button class="btn action col-span-4" id="clear">C</button>
         </div>
 
         <button id="showHis"
@@ -64,7 +67,7 @@
 
         // ---------- State ----------
         let numbers = JSON.parse(localStorage.getItem('Calculations')) || [];
-        let finalResult = 0;
+        let justCalculated = false; // tracks whether "=" was just pressed
 
         // ---------- Storage ----------
         function saveToLocal() {
@@ -87,56 +90,64 @@
         }
 
         // ---------- Calculator logic ----------
-        function acting(operator) {
-            let arr = inputBox.value.split(operator);
-            let justValue = Number(arr[0]);
-
-            for (let x = 1; x < arr.length; x++) {
-                if (operator === '+') justValue += Number(arr[x]);
-                else if (operator === '-') justValue -= Number(arr[x]);
-                else if (operator === '*') justValue *= Number(arr[x]);
-                else if (operator === '/') justValue /= Number(arr[x]);
+        // Handles mixed operators (5+3*2) correctly by respecting normal math precedence,
+        // instead of splitting on just one operator like before.
+        function calculate(expression) {
+            // only allow digits, ., and + - * / — blocks anything unsafe
+            if (!/^[0-9+\-*/.]+$/.test(expression)) {
+                return 'Error';
             }
-
-            return justValue;
-        }
-
-        function convert() {
-            let operators = ['+', '-', '*', '/'];
-            let sign = operators.find(op => inputBox.value.includes(op));
-            return acting(sign);
+            try {
+                let result = Function('"use strict"; return (' + expression + ')')();
+                if (!isFinite(result)) return 'Error'; // catches divide by zero (Infinity/NaN)
+                return result;
+            } catch {
+                return 'Error';
+            }
         }
 
         // ---------- Event listeners ----------
         eachButton.forEach(button => {
             button.addEventListener('click', (e) => {
+                // after "=", digits start a fresh number, but operators continue the chain
+                if (justCalculated) {
+                    if (!e.target.classList.contains('op')) {
+                        inputBox.value = '';
+                    }
+                    justCalculated = false;
+                }
                 inputBox.value += e.target.textContent;
             });
         });
 
         operation.addEventListener('click', () => {
-            numbers.push(inputBox.value);
+            if (inputBox.value === '' || inputBox.value === 'Error') return;
+
+            let result = calculate(inputBox.value);
+            numbers.push(`${inputBox.value} = ${result}`);
             saveToLocal();
-            finalResult = convert();
-            inputBox.value = finalResult;
+            inputBox.value = result;
+            justCalculated = true;
             dispaly();
         });
 
         clear.addEventListener('click', () => {
             inputBox.value = '';
+            justCalculated = false;
         });
 
         showHis.addEventListener('click', () => {
             dataHis.classList.remove('hidden');
         });
 
-        // delegated delete handler — one listener, catches clicks on any .delBtn
+        // delegated delete handler — deletes by position, so duplicate entries
+        // (e.g. two identical "9+3" rows) no longer both get removed
         storingHis.addEventListener('click', (e) => {
             if (e.target.classList.contains('delBtn')) {
-                let gettingFromLocal = JSON.parse(localStorage.getItem('Calculations'));
-                numbers = gettingFromLocal.filter(n => n !== e.target.parentElement.querySelector('p').textContent);
+                let index = Array.from(storingHis.children).indexOf(e.target.parentElement);
+                numbers.splice(index, 1);
                 saveToLocal();
-                e.target.parentElement.remove();
+                dispaly();
             }
         });
 
