@@ -87,25 +87,25 @@
         }
 
         // ---------- Calculator logic ----------
-        function acting(operator) {
-            let arr = inputBox.value.split(operator);
-            let justValue = Number(arr[0]);
+        // function acting(operator) {
+        //     let arr = inputBox.value.split(operator);
+        //     let justValue = Number(arr[0]);
 
-            for (let x = 1; x < arr.length; x++) {
-                if (operator === '+') justValue += Number(arr[x]);
-                else if (operator === '-') justValue -= Number(arr[x]);
-                else if (operator === '*') justValue *= Number(arr[x]);
-                else if (operator === '/') justValue /= Number(arr[x]);
-            }
+        //     for (let x = 1; x < arr.length; x++) {
+        //         if (operator === '+') justValue += Number(arr[x]);
+        //         else if (operator === '-') justValue -= Number(arr[x]);
+        //         else if (operator === '*') justValue *= Number(arr[x]);
+        //         else if (operator === '/') justValue /= Number(arr[x]);
+        //     }
 
-            return justValue;
-        }
+        //     return justValue;
+        // }
 
-        function convert() {
-            let operators = ['+', '-', '*', '/'];
-            let sign = operators.find(op => inputBox.value.includes(op));
-            return acting(sign);
-        }
+        // function convert() {
+        //     let operators = ['+', '-', '*', '/'];
+        //     let sign = operators.find(op => inputBox.value.includes(op));
+        //     return acting(sign);
+        // }
 
         // ---------- Event listeners ----------
         eachButton.forEach(button => {
@@ -117,7 +117,7 @@
         operation.addEventListener('click', () => {
             numbers.push(inputBox.value);
             saveToLocal();
-            finalResult = convert();
+            finalResult = Function('"use strict"; return (' + inputBox.value + ')')();;
             inputBox.value = finalResult;
             dispaly();
         });

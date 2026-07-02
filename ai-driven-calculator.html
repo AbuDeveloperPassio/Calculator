@@ -94,14 +94,19 @@
         // instead of splitting on just one operator like before.
         function calculate(expression) {
             // only allow digits, ., and + - * / — blocks anything unsafe
+            console.log(expression)
             if (!/^[0-9+\-*/.]+$/.test(expression)) {
                 return 'Error';
             }
+
             try {
                 let result = Function('"use strict"; return (' + expression + ')')();
+                 console.log(result)
                 if (!isFinite(result)) return 'Error'; // catches divide by zero (Infinity/NaN)
                 return result;
-            } catch {
+            } 
+            
+            catch {
                 return 'Error';
             }
         }
@@ -123,7 +128,12 @@
         operation.addEventListener('click', () => {
             if (inputBox.value === '' || inputBox.value === 'Error') return;
 
+            console.log(inputBox.value)
+
             let result = calculate(inputBox.value);
+
+            console.log(result)
+
             numbers.push(`${inputBox.value} = ${result}`);
             saveToLocal();
             inputBox.value = result;
